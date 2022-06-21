@@ -6,6 +6,9 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,18 +28,22 @@ import com.ellah.befit.ui.WorkoutsActivity;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder> {
+public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapter.ExerciseViewHolder> implements Filterable {
     private List<ExerciseDbResponse> mExercises;
     private Context mContext;
+    private List<ExerciseDbResponse> exerciseList= new ArrayList<>();
 
     public ExerciseListAdapter(Context context, List<ExerciseDbResponse> exercises) {
         mContext = context;
         mExercises = exercises;
+        exerciseList = exercises;
     }
 
     @NonNull
@@ -57,6 +64,38 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
     public int getItemCount() {
         return mExercises.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+    Filter filter = new Filter(){
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<ExerciseDbResponse> filteredList = new ArrayList<>();
+            if(charSequence.toString().isEmpty()){
+                filteredList.addAll(exerciseList);
+            }else{
+                    for (ExerciseDbResponse exerciseDbResponse : exerciseList) {
+                        if(exerciseDbResponse.toString().contains(charSequence.toString().toLowerCase())){
+                            filteredList.add(exerciseDbResponse);
+                        }
+
+                    }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values =filteredList;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            mExercises.clear();
+            mExercises.addAll((Collection<? extends ExerciseDbResponse>) filterResults.values);
+
+        }
+    };
 
     public class ExerciseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.exerciseImageView)

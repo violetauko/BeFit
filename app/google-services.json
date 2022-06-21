@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "125230516713",
+    "project_id": "befit-6b81f",
+    "storage_bucket": "befit-6b81f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125230516713:android:20cfc674983b97a47d6378",
+        "android_client_info": {
+          "package_name": "com.ellah.befit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125230516713-9p6bos3nrmtu256i7lnhnvnaaa0lf391.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ellah.befit",
+            "certificate_hash": "24f1bf7e3fd30d89bc30d08d778757b3183d0a3f"
+          }
+        },
+        {
+          "client_id": "125230516713-hte1u1shihtphqcoc2r79jccftio68q3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyyT8fdhU8gK0YvcpRuzfyFMgdzwyFz8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125230516713-hte1u1shihtphqcoc2r79jccftio68q3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
