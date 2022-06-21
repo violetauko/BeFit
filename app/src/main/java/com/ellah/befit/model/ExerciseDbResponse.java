@@ -4,6 +4,9 @@ package com.ellah.befit.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class ExerciseDbResponse {
 
     @SerializedName("bodyPart")

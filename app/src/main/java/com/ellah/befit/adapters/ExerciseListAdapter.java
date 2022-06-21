@@ -1,6 +1,7 @@
 package com.ellah.befit.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,10 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.ellah.befit.R;
 import com.ellah.befit.model.ExerciseDbResponse;
+import com.ellah.befit.ui.WorkoutsActivity;
 
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -54,7 +58,7 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
         return mExercises.size();
     }
 
-    public class ExerciseViewHolder extends RecyclerView.ViewHolder {
+    public class ExerciseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.exerciseImageView)
         ImageView mExerciseImageView;
         @BindView(R.id.exerciseNameTextView)
@@ -71,6 +75,8 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+
+            itemView.setOnClickListener(this);
         }
 //
         public void bind(ExerciseDbResponse exercise) {
@@ -95,5 +101,14 @@ public class ExerciseListAdapter extends RecyclerView.Adapter<ExerciseListAdapte
                     }).into(mExerciseImageView);
     }
 
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, WorkoutsActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("exercises", Parcels.wrap(mExercises));
+            mContext.startActivity(intent);
+
+        }
     }
 }
